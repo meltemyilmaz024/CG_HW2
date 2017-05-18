@@ -1,2 +1,3 @@
 # CG_HW2
-Learning how to apply modelview and projection.
+
+In this WebGL programming homework, you will learn how to apply modelview and projection transformations.
