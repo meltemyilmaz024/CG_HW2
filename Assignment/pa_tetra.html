@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+uniform mat4 r, s, t;
+
+void main()
+{
+	// Multiply the position by the matrix.
+    // gl_Position = projectionMatrix*modelViewMatrix*vPosition;
+    gl_Position = r * s * t * projectionMatrix * modelViewMatrix * vPosition;
+    fColor = vColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+#ifdef GL_ES
+precision highp float;
+#endif
+
+
+varying vec4 fColor;
+
+void
+main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="pa_tetra.js"></script>
+
+<body style="background-color:powderblue;">
+
+<div>
+ -- Meltem YILMAZ --
+</div>
+<table>
+	<tr>
+		<td>
+		<canvas id="gl-canvas" width="512" height="512">
+			Oops ... your browser doesn't support the HTML5 canvas element
+		</canvas>
+		</td>
+		<td>
+			<div> <strong>---- Controls ----</strong> </div><br>
+			<div> <strong>Camera related </strong></div>
+			<div>
+			FOVY: 30<input id="fovySlider" type="range"
+			 min="30" max="120" step="5.0" value="70" />120
+			</div>
+			<div>
+			Camera Position, X: <input id="inp_camX" type="number " size="2"
+			 value="0" />, Y: <input id="inp_camY" type="number " size="2"
+			 value="0" />, Z: <input id="inp_camZ" type="number " size="2"
+			 value="3" />
+			</div>
+			<div>
+			Target Position, X: <input id="inp_tarX" type="number " size="2"
+			 value="0" />, Y: <input id="inp_tarY" type="number " size="2"
+			 value="0" />, Z: <input id="inp_tarZ" type="number " size="2"
+			 value="0" />
+			</div>
+			<br>
+
+			<div> <strong>Object related </strong></div>
+			<div>
+			Position,   X: <input id="inp_objX" type="number " size="2"
+			 value="0" />, Y: <input id="inp_objY" type="number " size="2"
+			 value="0" />, Z: <input id="inp_objZ" type="number " size="2"
+			 value="0" />
+			</div>
+			<div>
+			Scale, X: <input id="inp_obj_scaleX" type="number " size="2"
+			 value="1" />, Y: <input id="inp_obj_scaleY" type="number " size="2"
+			 value="1" />, Z: <input id="inp_obj_scaleZ" type="number " size="2"
+			 value="1" />
+			</div>
+			<div>
+			Rotation on X: -90<input id="objRotationXSlider" type="range"
+			 min="-90" max="90" step="10.0" value="0" />90
+			</div>
+			<div>
+			Rotation on Y: -90<input id="objRotationYSlider" type="range"
+			 min="-90" max="90" step="10.0" value="0" />90
+			</div>
+			<div>
+			Rotation on Z: -90<input id="objRotationZSlider" type="range"
+			 min="-90" max="90" step="10.0" value="0" />90
+			</div>
+			<br>
+		</td>
+	</tr>
+</table>
+<div>
+
+
+
+</body>
+</html>
